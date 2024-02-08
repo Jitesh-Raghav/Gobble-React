@@ -1,8 +1,8 @@
 import RestaurantCard from "./RestaurantCard";
 import AllResData from "../utils/mockData";
 import { useState , useEffect } from "react";                    //react hook is normal js function, like a utility function
-import Shimmer from "./Shimmer";                                                                 //useState react hook or a utility function which keeps data and ui layer in sync.
-
+import Shimmer from "./Shimmer";                                  //useState react hook or a utility function which keeps data and ui layer in sync.
+import {Link} from "react-router-dom"
 
 const Body= () =>{
 
@@ -11,12 +11,12 @@ const Body= () =>{
 
     const [searchText, setsearchText]= useState("");
 
-     useEffect(()=>{
-      fetchData();
-     },[]);
+     useEffect(()=>{                                                //if no dependency array[], useEffect called on every render 
+      fetchData();                                                  //if dependency array[] empty, useEffect called on initial render only(just once)
+     },[]);                                                         //if dependency array [btnName], useEffect called when btnName is updated..
 
      const fetchData=async ()=>{      //try using corsproxy.io here..
-      const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.6148698&lng=73.8729867&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING      ");
+      const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.6148698&lng=73.8729867&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
 
       const json= await data.json();
       console.log(json);
@@ -62,7 +62,7 @@ const Body= () =>{
 
            <div className="res-container">
              {FilteredlistOfRes.map((restaurant)=>(                              //This is basically the iteration of all the restaurants     //study map,filter,reduce...
-             <RestaurantCard key={restaurant.info.id} resData={restaurant}/>  //every card should have a unique key, bina uske bhi ho jayega but it should have keys...
+             <Link key={restaurant.info.id} to={"/restaurants/"+ restaurant.info.id}><RestaurantCard resData={restaurant}/></Link>  //every card should have a unique key, bina uske bhi ho jayega but it should have keys...
            ))}
           </div>
        </div>
