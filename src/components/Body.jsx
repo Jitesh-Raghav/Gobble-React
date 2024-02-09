@@ -3,6 +3,7 @@ import AllResData from "../utils/mockData";
 import { useState , useEffect } from "react";                    //react hook is normal js function, like a utility function
 import Shimmer from "./Shimmer";                                  //useState react hook or a utility function which keeps data and ui layer in sync.
 import {Link} from "react-router-dom"
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body= () =>{
 
@@ -29,6 +30,9 @@ const Body= () =>{
     // if(listOfRestaurant.length==0){
     //   return <Shimmer/>;  
     // }
+
+    const onlineStatus= useOnlineStatus();
+    if(onlineStatus==false) return <h1>Looks like you're offline, check the internet conncetion and try again</h1>
 
     return listOfRestaurant.length==0 ? (
             <Shimmer/>
