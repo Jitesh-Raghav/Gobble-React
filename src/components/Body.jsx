@@ -38,12 +38,12 @@ const Body= () =>{
             <Shimmer/>
      ) : (
        <div className="body">
-         <div className="filter">
-          <div className="search">
-            <input type="text" className="search-box" value={searchText} onChange={(e)=>{   //did this cuz i want the value user enters in the search text
+         <div className="filter flex">
+          <div className="search m-4 p-4">
+            <input type="text" className="border border-solid border-black" value={searchText} onChange={(e)=>{   //did this cuz i want the value user enters in the search text
               setsearchText(e.target.value);
             }}/>
-            <button onClick={()=>{
+            <button className="px-4 py-2 m-4 bg bg-green-100 shadow rounded-lg" onClick={()=>{
               //filter the restaurant cards and update the UI
 
               console.log(searchText);
@@ -55,16 +55,18 @@ const Body= () =>{
 
             }}>search</button>
           </div>
-           <button className="filter-btn" onClick={()=>{                     //here call js code is written in {}, and inside it there is a callback function ()=>{} which does something onClick
+           <div className="px-4 py-2 m-4 flex items-center">
+           <button className="m-4 p-4 flex bg bg-gray-100 shadow rounded-lg" onClick={()=>{                     //here call js code is written in {}, and inside it there is a callback function ()=>{} which does something onClick
 
-             const filteredList= listOfRestaurant.filter(
-                (res)=> res.info.avgRating>4);
-                setlistOfRestaurant(filteredList);                           //whenever a state variable changes react re-renders the components and keeps the ui and data layer in sync
+                        const filteredList= listOfRestaurant.filter(
+                        (res)=> res.info.avgRating>4);
+                        setlistOfRestaurant(filteredList);                           //whenever a state variable changes react re-renders the components and keeps the ui and data layer in sync
 
-             }}>Top Rated Restaurants</button>
+                      }}>Top Rated Restaurants</button>
+           </div>
           </div>
 
-           <div className="res-container">
+           <div className="flex flex-wrap">
              {FilteredlistOfRes.map((restaurant)=>(                              //This is basically the iteration of all the restaurants     //study map,filter,reduce...
              <Link key={restaurant.info.id} to={"/restaurants/"+ restaurant.info.id}><RestaurantCard resData={restaurant}/></Link>  //every card should have a unique key, bina uske bhi ho jayega but it should have keys...
            ))}

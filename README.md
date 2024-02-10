@@ -82,6 +82,16 @@ import {Component} from "path";
  
 
 
+# Ways to add CSS to project
+ -Normal CSS
+ -SASS, SCSS
+ -Styled Components
+ -Material UI(react component library)
+ -Bootstrap
+ -Chakra UI
+ -Ant Design 
+ -Tailwind CSS
+
  # Redux Toolkit
   - Install @reduxjs/toolkit and react-redux
   - Build our store
