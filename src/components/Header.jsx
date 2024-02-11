@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { LOGO_URL } from "../utils/constants";
+import { LOGO_URL } from "../utils/constants";  //won't using the logo url now, direct png using
+import logo from "../images/logo.png";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 
@@ -10,18 +11,18 @@ const Header= () =>{
     const[btnName,setbtnName]= useState("Logout");
 
     return(
-        <div className="flex justify-between bg bg-pink-100 shadow-lg m-1">
+        <div className="flex justify-between shadow-lg bg-gradient-to-b from-lime-500 to-lime-200 ">
             <div className="logo-container"> 
-                <img className="w-40"src={LOGO_URL} />
+                <img className="w-40"src={logo} />
             </div>
             <div className="flex align items-center">
-             <ul className="flex p-5 m-4">
+             <ul className="flex p-5 m-4 text-l">
                 <li className="px-4">Online Status: {onlineStatus? "🟢":"🔴"}</li>
                 <li className="px-4"><Link to="/">Home</Link></li> 
                 <li className="px-4"><Link to="/grocery">Grocery</Link></li>             
                 <li className="px-4"><Link to="/about">About Us</Link></li>
                 <li className="px-4"><Link to="/contact">Contact Us</Link></li>           
-                <li>Cart</li>
+                <li className="px-4">Cart</li>
                 <button  className="button" 
                 onClick={()=>{
                     // btnName="Login";

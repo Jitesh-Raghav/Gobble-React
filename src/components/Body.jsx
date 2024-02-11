@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, {withPromotedLabel}from "./RestaurantCard";
 import AllResData from "../utils/mockData";
 import { useState , useEffect } from "react";                    //react hook is normal js function, like a utility function
 import Shimmer from "./Shimmer";                                  //useState react hook or a utility function which keeps data and ui layer in sync.
@@ -12,6 +12,8 @@ const Body= () =>{
 
     const [searchText, setsearchText]= useState("");
 
+    const RestaurantCardPromoted=withPromotedLabel(RestaurantCard);
+
      useEffect(()=>{                                                //if no dependency array[], useEffect called on every render 
       fetchData();                                                  //if dependency array[] empty, useEffect called on initial render only(just once)
      },[]);                                                         //if dependency array [btnName], useEffect called when btnName is updated..
@@ -21,7 +23,8 @@ const Body= () =>{
 
       const json= await data.json();
       console.log(json);
-      setlistOfRestaurant(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);  //optionall chaining 
+      setlistOfRestaurant(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);  //optionall chaining
+      console.log(listOfRestaurant); 
       setFilteredlistOfRes(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     };
 
@@ -40,10 +43,10 @@ const Body= () =>{
        <div className="body">
          <div className="filter flex">
           <div className="search m-4 p-4">
-            <input type="text" className="border border-solid border-black" value={searchText} onChange={(e)=>{   //did this cuz i want the value user enters in the search text
+            <input type="text" className="border border-solid border-black rounded-lg py-1" value={searchText} onChange={(e)=>{   //did this cuz i want the value user enters in the search text
               setsearchText(e.target.value);
             }}/>
-            <button className="px-4 py-2 m-4 bg bg-green-100 shadow rounded-lg" onClick={()=>{
+            <button className="px-4 py-2 m-4 bg-lime-300 hover:bg-lime-400 shadow rounded-lg" onClick={()=>{
               //filter the restaurant cards and update the UI
 
               console.log(searchText);
@@ -56,7 +59,7 @@ const Body= () =>{
             }}>search</button>
           </div>
            <div className="px-4 py-2 m-4 flex items-center">
-           <button className="m-4 p-4 flex bg bg-gray-100 shadow rounded-lg" onClick={()=>{                     //here call js code is written in {}, and inside it there is a callback function ()=>{} which does something onClick
+           <button className="m-4 p-4 flex bg bg-lime-300 hover:bg-lime-400  shadow rounded-lg" onClick={()=>{                     //here call js code is written in {}, and inside it there is a callback function ()=>{} which does something onClick
 
                         const filteredList= listOfRestaurant.filter(
                         (res)=> res.info.avgRating>4);
@@ -68,11 +71,15 @@ const Body= () =>{
 
            <div className="flex flex-wrap">
              {FilteredlistOfRes.map((restaurant)=>(                              //This is basically the iteration of all the restaurants     //study map,filter,reduce...
-             <Link key={restaurant.info.id} to={"/restaurants/"+ restaurant.info.id}><RestaurantCard resData={restaurant}/></Link>  //every card should have a unique key, bina uske bhi ho jayega but it should have keys...
+             <Link key={restaurant.info.id} to={"/restaurants/"+ restaurant.info.id}>
+              {restaurant.info.avgRating> 4.5?   //print promoted for Restaurant with rating>4.5
+               (<RestaurantCardPromoted resData={restaurant}/>)  :  (<RestaurantCard resData={restaurant}/>
+              )}
+              </Link>  //every card should have a unique key, bina uske bhi ho jayega but it should have keys...
            ))}
           </div>
        </div>
- 
+  
     );
  };
 
