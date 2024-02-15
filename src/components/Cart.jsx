@@ -4,7 +4,10 @@ import { clearCart } from "../utils/cartSlice";
 
 const Cart=()=>{
 
-    const cartItems= useSelector((store)=>store.cart.items);
+    const cartItems= useSelector((store)=>store.cart.items);  //here only subscribing to specific part of store, so cartItems only update when store.cart.items change 
+
+    // const store= useSelector((store)=>store);    //Above useSelector and this is same, the difference is that, this is very less efficient, tell this in interview
+    // const cartItems=store.cart.items;            //cuz we only want cartItems then why to subscribe to whole store. 
 
     const dispatch= useDispatch();
 

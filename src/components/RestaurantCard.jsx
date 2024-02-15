@@ -29,8 +29,8 @@ const RestaurantCard= (props)=>{
 export const withPromotedLabel= (RestaurantCard)=>{
    return(props)=>{
      return(
-        <div>
-            <label className="absolute bg-gray-800 text-white rounded-lg p-1 m-2">Promoted</label>
+        <div className="relative">
+            <label className="absolute z-10 bg-gray-800 text-white rounded-lg p-1 m-2 transition-opacity duration-300 hover:opacity-75">Promoted</label>
             <RestaurantCard {...props}/>
         </div>
      );
