@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const cartSlice = createSlice({
   name: "cart",
@@ -16,7 +16,6 @@ const cartSlice = createSlice({
     clearCart: (state, action) => {
       state.items.length = 0; // originalState = []
 
-    //   return { items: [] }; // this new object will be replaced inside originalState = { items: [] }
     },
   },
 });

@@ -6,7 +6,7 @@ const RestaurantCard= (props)=>{
     //const{name,cuisines,avgRating,costForTwo,deliveryTime}= resData?.info; //optional chaining read
     
     return (
-        <div className="m-5 p-2 w-[260px] h-[500px] bg-gray-50 hover:bg-lime-100 rounded-lg shadow-lg">
+        <div className="m-5 p-2 w-[260px] h-[500px] bg-gray-50 hover:bg-lime-100 rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
     
             <img className="rounded-lg h-[250px] w-[300px] object-cover" alt="res-logo" src={ CDN_URL +resData.info.cloudinaryImageId}/>
               <div className="flex-1 p-3">

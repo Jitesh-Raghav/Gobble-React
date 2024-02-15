@@ -46,7 +46,7 @@ const Body= () =>{
             <input type="text" className="border border-solid border-black rounded-lg py-1" value={searchText} onChange={(e)=>{   //did this cuz i want the value user enters in the search text
               setsearchText(e.target.value);
             }}/>
-            <button className="px-4 py-2 m-4 bg-lime-300 hover:bg-lime-400 shadow rounded-lg" onClick={()=>{
+            <button className="px-4 py-2 m-4 bg-lime-300 text-black shadow rounded-lg hover:bg-lime-400 hover:shadow-lg" onClick={()=>{
               //filter the restaurant cards and update the UI
 
               console.log(searchText);
@@ -59,7 +59,7 @@ const Body= () =>{
             }}>search</button>
           </div>
            <div className="px-4 py-2 m-4 flex items-center">
-           <button className="m-4 p-4 flex bg bg-lime-300 hover:bg-lime-400  shadow rounded-lg" onClick={()=>{                     //here call js code is written in {}, and inside it there is a callback function ()=>{} which does something onClick
+           <button className="m-4 p-4 flex  bg-lime-300 text-black shadow rounded-lg hover:bg-lime-400 hover:shadow-lg" onClick={()=>{                     //here call js code is written in {}, and inside it there is a callback function ()=>{} which does something onClick
 
                         const filteredList= listOfRestaurant.filter(
                         (res)=> res.info.avgRating>4);
